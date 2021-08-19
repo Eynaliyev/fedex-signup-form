@@ -1,4 +1,8 @@
-<form class="signup-form" [formGroup]="signupFormGroup" (ngSubmit)="onSubmit()">
+<form
+  class="signup-form"
+  [formGroup]="signupFormGroup"
+  (ngSubmit)="onSignupClick()"
+>
   <mat-form-field class="signup--field">
     <input
       matInput
@@ -31,13 +35,14 @@
       type="password"
     />
   </mat-form-field>
-  <strong>{{ warningMessage }}</strong>
+  <p>
+    {{ errorMessage }}
+  </p>
   <button
     mat-raised-button
     name="signupFormSubmitBtn"
     class="signup--btn"
     type="submit"
-    [disabled]="!signupFormGroup.valid"
   >
     Signup
   </button>
