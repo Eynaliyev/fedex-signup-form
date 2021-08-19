@@ -1,0 +1,44 @@
+<form class="signup-form" [formGroup]="signupFormGroup" (ngSubmit)="onSubmit()">
+  <mat-form-field class="signup--field">
+    <input
+      matInput
+      placeholder="first name"
+      formControlName="firstNameInputControl"
+      type="text"
+    />
+  </mat-form-field>
+  <mat-form-field class="signup--field">
+    <input
+      matInput
+      placeholder="last name"
+      formControlName="lastNameInputControl"
+      type="text"
+    />
+  </mat-form-field>
+  <mat-form-field class="signup--field">
+    <input
+      matInput
+      placeholder="email"
+      formControlName="emailInputControl"
+      type="email"
+    />
+  </mat-form-field>
+  <mat-form-field class="signup--field">
+    <input
+      matInput
+      placeholder="password"
+      formControlName="passwordInputControl"
+      type="password"
+    />
+  </mat-form-field>
+  <strong>{{ warningMessage }}</strong>
+  <button
+    mat-raised-button
+    name="signupFormSubmitBtn"
+    class="signup--btn"
+    type="submit"
+    [disabled]="!signupFormGroup.valid"
+  >
+    Signup
+  </button>
+</form>
