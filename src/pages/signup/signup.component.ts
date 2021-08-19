@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { validateAllFormFields, passwordValidator } from '../../validator';
+import {
+  validateAllFormFields,
+  passwordValidator,
+  nonNumericOnly,
+  lowerCaseExists,
+  upperCaseExists,
+} from '../../validator';
 import { AuthService } from '../../services/auth.service';
 import { User } from 'src/models/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarComponent } from 'src/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'signup',
@@ -14,11 +22,17 @@ export class SignupComponent {
   res: User | null = null;
   signupFormGroup: FormGroup;
 
-  constructor(private authSrvc: AuthService) {
+  constructor(private authSrvc: AuthService, private _snackBar: MatSnackBar) {
     this.signupFormGroup = new FormGroup(
       {
-        firstNameInputControl: new FormControl('', [Validators.required]),
-        lastNameInputControl: new FormControl('', [Validators.required]),
+        firstNameInputControl: new FormControl('', [
+          Validators.required,
+          nonNumericOnly(),
+        ]),
+        lastNameInputControl: new FormControl('', [
+          Validators.required,
+          nonNumericOnly(),
+        ]),
         emailInputControl: new FormControl('', [
           Validators.required,
           Validators.email,
@@ -26,6 +40,7 @@ export class SignupComponent {
         passwordInputControl: new FormControl('', [
           Validators.required,
           Validators.minLength(8),
+          lowerCaseExists(),
         ]),
         submitBtnControl: new FormControl(''),
       },
@@ -33,9 +48,15 @@ export class SignupComponent {
     );
   }
 
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: 3000,
+      data: `Signup successful, your id is: ${this.res?.id}`,
+    });
+  }
+
   onSignupClick() {
     if (validateAllFormFields(this.signupFormGroup)) {
-      console.log('all valid, calling signup field', this.signupFormGroup);
       this.onSubmit();
     }
   }
@@ -46,9 +67,9 @@ export class SignupComponent {
       lastName: this.signupFormGroup.controls.lastNameInputControl.value,
       email: this.signupFormGroup.controls.emailInputControl.value,
     };
-    console.log(userData);
     this.authSrvc.submitUser(userData).subscribe((res) => {
       this.res = res;
+      this.openSnackBar();
     });
   }
 }

@@ -1,14 +1,14 @@
 # FedexSignupForm
 
 // TO DO:
-use angular material instead - done
-use the validation of angular material - I've already done it before
+fix: password validation field highlighting
+add: descriptive / per field error messages
 
-1. make sure to take into account accessibility / semantic html
 2. add tests
 3. nice angular materail style
 4. documentation in readme
 5. add alert with a success - perhaps a homeo page to redirect to showing your information with a link back?
+6. address previous comments
 
 // consider turning sign up page into a separate module - overkill for now
 
@@ -16,6 +16,9 @@ imporvements:
 
 1. make it mobile friendly
 2. split each page intp a separate module - since there's only 1 page - this is an overkill
+
+Accessibility
+aria labels and validity is added via angular materia
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 

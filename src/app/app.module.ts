@@ -8,15 +8,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from '../pages/signup/signup.component';
 import { HeaderComponent } from '../components/header/header.component';
+import { SnackbarComponent } from '../components/snackbar/snackbar.component';
 import { AuthService } from 'src/services/auth.service';
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    SignupComponent,
+    HeaderComponent,
+    SnackbarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,6 +35,7 @@ import { AuthService } from 'src/services/auth.service';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
     CommonModule,
   ],
   providers: [AuthService],

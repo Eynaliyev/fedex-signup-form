@@ -1,6 +1,5 @@
 import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { Injectable } from '@angular/core';
 export const validateAllFormFields = (formGroup: FormGroup): boolean => {
   let isValid = true;
   Object.keys(formGroup.controls).forEach((field) => {
@@ -17,19 +16,27 @@ export const validateAllFormFields = (formGroup: FormGroup): boolean => {
   return isValid;
 };
 
-export function upperCaseValidator(): ValidatorFn {
+export function upperCaseExists(): ValidatorFn {
   const regEx = new RegExp('[A-Z]', 'g');
   return (control: AbstractControl): ValidationErrors | null => {
-    const forbidden = regEx.test(control.value);
+    const forbidden = !regEx.test(control.value);
+    console.log(control.value, !forbidden);
     return forbidden ? { upperCase: { value: control.value } } : null;
   };
 }
 
-export function lowerCaseValidator(): ValidatorFn {
+export function lowerCaseExists(): ValidatorFn {
   const regEx = new RegExp('[a-z]', 'g');
   return (control: AbstractControl): ValidationErrors | null => {
-    const forbidden = regEx.test(control.value);
+    const forbidden = !regEx.test(control.value);
     return forbidden ? { lowerCase: { value: control.value } } : null;
+  };
+}
+
+export function nonNumericOnly(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const forbidden = /\d/.test(control.value);
+    return forbidden ? { hasNumber: { value: control.value } } : null;
   };
 }
 
@@ -39,8 +46,6 @@ export function forbiddenStringValidator(
 ): ValidationErrors | null {
   if (!str) return null;
   const forbidden = nameRe.test(str);
-  console.log('nameRe ', nameRe);
-  console.log('forbidden ', forbidden);
   return forbidden ? { forbiddenString: { value: str } } : null;
 }
 
