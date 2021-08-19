@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -32,7 +31,6 @@ import { AuthService } from 'src/services/auth.service';
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,

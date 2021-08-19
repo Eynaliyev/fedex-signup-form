@@ -5,10 +5,10 @@ fix: password validation field highlighting
 add: descriptive / per field error messages
 
 2. add tests
-3. nice angular materail style
-4. documentation in readme
-5. add alert with a success - perhaps a homeo page to redirect to showing your information with a link back?
-6. address previous comments
+   component - add some tests checking the erroor sstate of fields
+   validator functions test - for valid and invalid cases
+3. documentation in readme
+4. address previous comments
 
 // consider turning sign up page into a separate module - overkill for now
 
@@ -19,6 +19,11 @@ imporvements:
 
 Accessibility
 aria labels and validity is added via angular materia
+
+Testing:
+as most of the logic is concentrated in the signup component - I wrote a few e2e tests to test out valid and invalid cases. I mocked out the services to test them in isolation - in the signup.component.spec.ts
+
+Additionally, I added unit tests for the validation functinos that I wrote.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 

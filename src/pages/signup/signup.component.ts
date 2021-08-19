@@ -41,6 +41,7 @@ export class SignupComponent {
           Validators.required,
           Validators.minLength(8),
           lowerCaseExists(),
+          upperCaseExists(),
         ]),
         submitBtnControl: new FormControl(''),
       },
