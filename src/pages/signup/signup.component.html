@@ -35,9 +35,6 @@
       type="password"
     />
   </mat-form-field>
-  <p>
-    {{ errorMessage }}
-  </p>
   <button
     mat-raised-button
     name="signupFormSubmitBtn"
@@ -46,4 +43,7 @@
   >
     Signup
   </button>
+  <mat-error class="signup-error">
+    {{ errorMessage }}
+  </mat-error>
 </form>

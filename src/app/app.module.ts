@@ -15,6 +15,7 @@ import { SignupComponent } from '../pages/signup/signup.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { SnackbarComponent } from '../components/snackbar/snackbar.component';
 import { AuthService } from 'src/services/auth.service';
+import { FormService } from 'src/services/form.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { AuthService } from 'src/services/auth.service';
     MatSnackBarModule,
     CommonModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, FormService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

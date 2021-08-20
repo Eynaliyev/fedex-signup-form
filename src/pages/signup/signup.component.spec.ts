@@ -1,8 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  HttpTestingController,
-  HttpClientTestingModule,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,9 +7,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SignupComponent } from './signup.component';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('SignupComponent', () => {
   const INVALID_NAME = '123hello';
@@ -21,10 +16,6 @@ describe('SignupComponent', () => {
   const VALID_PASSWORD = 'Rr123123123';
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
-  let authSrvc: AuthService;
-  let httpMock: HttpTestingController;
-  let httpClient: HttpClient;
-  let _snackBar: MatSnackBar;
 
   beforeEach(
     waitForAsync(() => {
@@ -42,8 +33,6 @@ describe('SignupComponent', () => {
         ],
         providers: [AuthService],
       }).compileComponents();
-      httpMock = TestBed.get(HttpTestingController);
-      httpClient = TestBed.inject(HttpClient);
     })
   );
 

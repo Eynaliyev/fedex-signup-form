@@ -1,8 +1,8 @@
-import { FormGroup, FormControl, ValidatorFn } from '@angular/forms';
+import { ValidatorFn } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export function upperCaseExists(): ValidatorFn {
-  const regEx = new RegExp('[A-Z]', 'g');
+  const regEx = new RegExp('(?=.*[A-Z])');
   return (control: AbstractControl): ValidationErrors | null => {
     const escapedStr = control.value.replace(/\\/g, '\\\\');
     const forbidden = !regEx.test(escapedStr);
@@ -13,7 +13,7 @@ export function upperCaseExists(): ValidatorFn {
 }
 
 export function lowerCaseExists(): ValidatorFn {
-  const regEx = new RegExp('[a-z]', 'g');
+  const regEx = new RegExp('(?=.*[a-z])');
   return (control: AbstractControl): ValidationErrors | null => {
     const escapedStr = control.value.replace(/\\/g, '\\\\');
     const forbidden = !regEx.test(escapedStr);
@@ -33,7 +33,7 @@ export function nonNumericOnly(): ValidatorFn {
   };
 }
 
-export function forbiddenStringValidator(
+function forbiddenStringValidator(
   str: string,
   nameRe: RegExp
 ): ValidationErrors | null {
@@ -59,13 +59,15 @@ export const passwordValidator: ValidatorFn = (
     ?.value.replace(/\\/g, '\\\\');
   const firstNameRe = new RegExp(firstName, 'gi');
   const lastNameRe = new RegExp(lastName, 'gi');
-  const error = { value: 'should not include first or last name' };
+  const error = {
+    invalidPassword: { value: 'should not include first or last name' },
+  };
   if (
     forbiddenStringValidator(password, firstNameRe) ||
     forbiddenStringValidator(password, lastNameRe)
   ) {
     control.get('passwordInputControl')?.setErrors(error);
-    return { invalidPassword: error };
+    return error;
   }
   return null;
 };

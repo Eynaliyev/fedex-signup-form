@@ -1,22 +1,28 @@
 # FedexSignupForm
 
-// TO DO:
-fix: password validation field highlighting
-add: descriptive / per field error messages
+## UX decisions
 
-1. password validation error messaging
-2. add tests
-   component - add some tests checking the erroor state of fields
-   validator functions test - for valid and invalid cases
-3. documentation in readme
-4. address previous comments
+there were two decisions I needed to make as they were not specified in the task description:
+
+1. how to display the validation to the user
+2. what to do with the API response
+
+to provide quick, yet unobtrusive feedback to the user I decided to highlight the field as invalid without displaying error message - only displaying 1 error at a time - when the user is tries to submit invalid form
+
+as far as response goes, the only thing that the api returned other than what was submitted was the generated uid - so I decided to display it as a snackbar - as a sort of success notification.
 
 ## Componoent architecture
 
 The application is pretty minimalistic - folder architecture is organised by type into components, services, pages, models etc.
 all of the shared functinality is in the src folder. If page was bigger, then components unique to each page and not shared with other pages, would be placed in the corresponding page's folder for ease of discovery.
 
-## imporvements:
+Additionally, I created a service for creating frms - in order t improve its testability and potentially can accomodate more forms and be made more configurable
+
+## dependencies
+
+I'm relying on Angular material library for styling of components
+
+## potential improvements:
 
 1. make it mobile friendly
 2. split each page intp a separate module - since there's only 1 page - this is an overkill for now, but could be invaluable for larger application - this would improve the first page load times. I'd also set up pre-loading to proactively load follow-up routes before the user has navigated to them to create smoother second page load experience
@@ -24,6 +30,8 @@ all of the shared functinality is in the src folder. If page was bigger, then co
 4. state management - different appraoches can be taken - I like having redux style architecture - howoever, would like to look into splitting it into modules if the application grew to a large size with multiple teams working on it
 5. re-orrganise applicaation by module instead of type
 6. escape special characters in the validator regexps
+7. refactor inputs into a reusable input component nd add ChangeDetectionStrategy.OnPush to it too improve change detection speed
+8. display error messages per field under each individual field on blur
 
 ## Accessibility
 
@@ -31,9 +39,9 @@ aria labels and validity is added via angular material
 
 ## Testing:
 
-as most of the logic is concentrated in the signup component - I wrote a few end-to-end tests to test out valid and invalid cases. I mocked out the services to test them in isolation - in the signup.component.spec.ts
+as most of the logic is concentrated in the signup component - I wrote a few integration tests to test out valid and invalid cases. I mocked out the services to test them in isolation - in the signup.component.spec.ts
 
-Additionally, I added unit tests for the validation functinos that I wrote.
+Additionally, I added unit tests for the validation functions that I wrote as well as the form-level tests in the form service. I have not added any tests for the auth service because it is quite trivial.
 
 ---
 
